@@ -1,0 +1,22 @@
+body {
+    width: 400px;
+    background-color: rgb(50, 50, 50);
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+#block_btn {
+    font-size: 20px;
+    padding: 10px;
+}
+
+#settings_btn {
+    padding: 8px;
+}
