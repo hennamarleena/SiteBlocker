@@ -8,10 +8,21 @@
 </head>
 <body>
     <h1>SiteBlocker</h1>
-    <input id="address_input" placeholder="www.distractingwebsite.com"></input>
-    <button id="block_btn">Block this website <br> (and get things done)</button>
-    <button id="settings_btn">SETTINGS</button>
-    <br>
+
+    <div>
+        <input id="website_address" placeholder="www.distractingwebsite.com" type="url"></input>
+        <button id="block_btn">Block this website <br> (and get things done)</button>
+    </div>
+
+    <div>
+        <h2>Websites blocked:</h2>
+        <div id="no-website-msg"><p>No websites blocked yet.</p></div>
+    </div>
+
+    <div id="list_of_blocked_sites">
+    </div>
+    
+    <button id="options_btn">OPTIONS</button>
     
     <script src="./actions.js"></script>
 </body>

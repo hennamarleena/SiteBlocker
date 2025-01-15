@@ -2,13 +2,14 @@
     "manifest_version": 3,
     "name": "SiteBlocker",
     "description": "Blocking distracting websites",
+    "background": { "actions.js": ["block.js"] },
     "version": "0.1",
-    "permissions": ["activeTab", "storage", "tabs"],
+    "permissions": ["activeTab", "storage", "tabs", "webRequest", "webRequestBlocking"],
     "action": {
         "default_popup": "popup.html",
         "default_icon": "icon.png"
     },
-    "options_page": "settings.html",
+    "options_page": "options.html",
     "content_scripts": [
         {
         "matches": [
