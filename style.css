@@ -21,7 +21,7 @@ p a {
     font-size: 30px;
 }
 
-#address_input {
+#website_address {
     padding: 10px 10px;
     margin-bottom: 15px;
     background-color: #535353;
@@ -50,7 +50,7 @@ p a {
     transform: scale(1.05);
 }
 
-#settings_btn {
+#options_btn {
     padding: 12px 25px;
     margin-top: 25px;
     margin-bottom: 20px;
@@ -63,15 +63,7 @@ p a {
     width: 30%;
 }
 
-#settings_btn:hover {
+#options_btn:hover {
     background-color: #333333; 
     transform: scale(1.05);
-}
-
-
-#enable-container {
-    margin: 0 auto;
-    border: 1px solid white;
-    width: 60px;
-    display: block;
 }
