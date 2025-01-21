@@ -8,8 +8,9 @@ Chrome-plugari joka blokkaa valitut sivustot
 - mahdollisuus poistaa blokattu sivu listalta
 
 **...Tällä hetkellä:**
-- lisää inputiin kirjoitetun sivun local storageen ja html:ään listaan
+- lisää inputiin kirjoitetun sivun local storageen ja listanäkymään
 - delete-nappula poistaa sivun listasta ja storagesta
+- "block current tab" lisää aktiivisena olevan välilehden listalle
 - ei blokkaa vielä mitään
 
 ## Asennus

@@ -5,6 +5,7 @@
     "background": { "actions.js": ["block.js"] },
     "version": "0.1",
     "permissions": ["activeTab", "storage", "tabs", "webRequest", "webRequestBlocking"],
+    "host_permissions" :["http://*/*", "https://*/*"], 
     "action": {
         "default_popup": "popup.html",
         "default_icon": "icon.png"
