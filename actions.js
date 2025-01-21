@@ -10,38 +10,41 @@ window.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'options.html';
     });
 
-    // Pushaa URL talteen localStorageen
-    function setWebsites(url){
-        let storedWebsites = getStoredWebsites();
+    // Lisää estettävä sivu
+    async function setWebsites(url){
+        let storedWebsites = await getStoredWebsites();
         if (!storedWebsites.includes(url)) {
             storedWebsites.push(url);
-            localStorage.setItem("website", JSON.stringify(storedWebsites));
-        }
-        return storedWebsites;
+            chrome.storage.local.set({ websites: storedWebsites });
+            return true; 
+        } else return false
+        // return storedWebsites;
     }
 
-    // Hae estetyt sivut localStoragesta
-    function getStoredWebsites(){
-        const storedWebsites = localStorage.getItem("website");
-        return JSON.parse(storedWebsites) || [];
+    // Nouda estetyt sivut
+    function getStoredWebsites() {
+        return new Promise((resolve) => {
+            chrome.storage.local.get(["websites"], (result) => {
+                resolve(result.websites || []);
+            });
+        });
     }
-   
-    // Alustaa estettyjen sivujen näyttämisen
-    function initializeBlockedSites() {
-        const storedWebsites = getStoredWebsites();
+
+    // Päivittää estettyjen sivujen listan popupissa
+    async function initializeBlockedSites() {
+        const storedWebsites = await getStoredWebsites();
         listOfBlockedSites.innerHTML = "";
             
         if (storedWebsites.length > 0) {
             noWebsiteMsg.style.display = "none";
             storedWebsites.forEach((website, index) => {
                 const listItem = document.createElement("li");
+                listItem.style.paddingBottom = "8px";
                 listItem.textContent = website;
-    
                 const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
+                deleteButton.textContent = "Delete"
                 deleteButton.style.marginLeft = "5px"
                 deleteButton.addEventListener("click", () => deleteWebsite(index));
-    
                 listItem.appendChild(deleteButton);
                 listOfBlockedSites.appendChild(listItem);
                 });
@@ -51,33 +54,34 @@ window.addEventListener('DOMContentLoaded', () => {
     };
         
         // Lisää estettävä sivu manuaalisesti
-        blockButton.addEventListener("click", () => {
+        blockButton.addEventListener("click", async () => {
             const url = website_address.value.trim();
-            if (url) {
-                setWebsites(url);
-                initializeBlockedSites();
-                website_address.value = "";
+            const added = await setWebsites(url);
+            if (added) {
+                initializeBlockedSites()
             }
+            website_address.value = "";
         });
 
         // Lisää nykyinen välilehti estettäväksi
         blockCurrentButton.addEventListener("click", async () => {
             try {
-                let queryOptions = { active: true, lastFocusedWindow: true };
-                let [currentTab] = await chrome.tabs.query(queryOptions);
+                let [currentTab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
                 const url = currentTab.url; 
-                setWebsites(url);
-                initializeBlockedSites();
+                const added = await setWebsites(url);
+                if (added) {
+                    initializeBlockedSites();
+                }
         } catch(error) {
-            console.error("Virhe aktiivisen välilehden URL:n käsittelyssä:", error);
+            console.error(error);
         }
         });
 
         // Poistaa estetyn sivun listalta
-        const deleteWebsite = (index) => {
-            let storedWebsites = getStoredWebsites();
+        async function deleteWebsite(index) {
+            const storedWebsites = await getStoredWebsites();
             storedWebsites.splice(index, 1);
-            localStorage.setItem("website", JSON.stringify(storedWebsites));
+            chrome.storage.local.set({ websites: storedWebsites });
             initializeBlockedSites();
         };
     

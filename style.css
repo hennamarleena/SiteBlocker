@@ -73,6 +73,9 @@ p a {
     transform: scale(1.05);
 }
 
+#list_of_blocked_sites {
+    text-align: left;
+}
 
 #options_btn {
     padding: 12px 25px;

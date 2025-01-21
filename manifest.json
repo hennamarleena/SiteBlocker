@@ -2,22 +2,18 @@
     "manifest_version": 3,
     "name": "SiteBlocker",
     "description": "Blocking distracting websites",
-    "background": { "actions.js": ["block.js"] },
+    "background": {
+        "service_worker": "background.js"
+    },
     "version": "0.1",
-    "permissions": ["activeTab", "storage", "tabs", "webRequest", "webRequestBlocking"],
+    "permissions": ["activeTab", "storage", "tabs", "declarativeNetRequest", "declarativeNetRequestFeedback", "declarativeNetRequestWithHostAccess"],
     "host_permissions" :["http://*/*", "https://*/*"], 
     "action": {
         "default_popup": "popup.html",
         "default_icon": "icon.png"
     },
-    "options_page": "options.html",
-    "content_scripts": [
-        {
-        "matches": [
-        "<all_urls>"
-        ],
-        "js": ["actions.js"],
-        "persistent": false
-        }
-    ]
+    "options_page": "options.html"
 }
+
+
+
