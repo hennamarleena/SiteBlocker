@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
             chrome.storage.local.set({ websites: storedWebsites });
             return true; 
         } else return false
-        // return storedWebsites;
     }
 
     // Nouda estetyt sivut
@@ -37,17 +36,24 @@ window.addEventListener('DOMContentLoaded', () => {
             
         if (storedWebsites.length > 0) {
             noWebsiteMsg.style.display = "none";
+
             storedWebsites.forEach((website, index) => {
                 const listItem = document.createElement("li");
-                listItem.style.paddingBottom = "8px";
-                listItem.textContent = website;
+                listItem.classList.add("list_item");
+
+                const textSpan = document.createElement("span");
+                textSpan.textContent = website;
+
                 const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete"
-                deleteButton.style.marginLeft = "5px"
+                deleteButton.classList.add("delete_button");
+                deleteButton.textContent = "❌";
                 deleteButton.addEventListener("click", () => deleteWebsite(index));
-                listItem.appendChild(deleteButton);
+
+                listItem.appendChild(textSpan);
+                listItem.appendChild(deleteButton); 
                 listOfBlockedSites.appendChild(listItem);
-                });
+            });
+
             } else {
                 noWebsiteMsg.style.display = "block";
             }

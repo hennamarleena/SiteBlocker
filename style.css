@@ -74,7 +74,18 @@ p a {
 }
 
 #list_of_blocked_sites {
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.flex_left {
+    width: 50%;
+}
+
+.flex_right {
+    width: 50%;
+   align-items: flex-end;
 }
 
 #options_btn {
@@ -92,5 +103,29 @@ p a {
 
 #options_btn:hover {
     background-color: #333333; 
+    transform: scale(1.05);
+}
+
+.list_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+}
+
+.delete_button {
+    margin-left: 10px;
+    height: 25px;
+    padding: 0 5px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.delete_button:hover {
+    background-color: #ffffff;
     transform: scale(1.05);
 }
